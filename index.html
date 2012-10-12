@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Calor-me! Calor-you! Calor-rifitastical!</title>
+  </head>
+  <body>
+    <nav>
+      <menu type="toolbar">
+        <a href="#summary">Summary</a>
+        <a href="#log">Log</a>
+        <a href="#settings">Settings</a>
+      </menu>
+    </nav>
+    <section id="summary">
+      <h2>Summary</h2>
+      <form>
+        <output>
+          <!-- Put picture of person here -->
+        </output>
+        <button class="addFuel" id="addFuel">+ Fuel</button>
+        <button class="addExercise" id="addExercise">- Exercise</button>
+        <input type="number" name="weight" value="70">
+      </form>
+      <section id="add-food" class="add-data">
+        <h2>Add food</h2>
+        <form>
+          <input name="food" list="foods" placeholder="e.g. Apple">
+          <datalist id="foods">
+            <option>Apple
+            <option>Donut
+          </datalist>
+          <label> x 
+            <input type="number" name="quantity" placeholder="e.g. 2"
+             class="food-quantity">
+          </label>
+          <input type="submit" value="OK">
+          <button class="cancel">Cancel</button>
+        </form>
+      </section>
+      <section id="add-exercise" class="add-data">
+        <h2>Add activity</h2>
+        <form>
+          <input name="activity" list="activities" placeholder="e.g. Running">
+          <datalist id="activities">
+            <option>Running
+            <option>Swimming
+          </datalist>
+          <label> for 
+            <input type="number" name="duration" placeholder="30"
+             class="activity-duration">
+            min
+          </label>
+          <input type="submit" value="OK">
+          <button class="cancel">Cancel</button>
+        </form>
+      </section>
+    </section>
+    <section id="log">
+      <h2>Log</h2>
+      <output>
+        <!-- Weight graph goes here -->
+      </output>
+      <details>
+        <summary class="under">
+          <time datetime="2012-10-12">12 Oct</time>,
+          <data class="calorie-balance under" value="-200">-200 kCal</data>
+        </summary>
+        <div class="log-entry plus">
+          <span class="food">Hamburger</span>
+          <data class="quantity" value="1">1</data>
+          <data class="calorie-count plus" value="500">500 kCal</data>
+        </div>
+        <div class="log-entry minus">
+          <span class="activity">Running</span>
+          <data class="calorie-count minus" value="-363">-363 kCal</data>
+        </div>
+      </details>
+      <details>
+        <summary class="under">
+          <time datetime="2012-10-11">11 Oct</time>,
+          <data class="calorie-balance over" value="153">+153 kCal</data>
+        </summary>
+      </details>
+      <details>
+        <summary class="equal">
+          <time datetime="2012-10-11">11 Oct</time>,
+          <data class="calorie-balance equal" value="8">+8 kCal</data>
+        </summary>
+      </details>
+    </section>
+    <section id="settings">
+      <h2>Settings</h2>
+      <label>Height (in cm):
+        <input type="number" name="height" placeholder="e.g. 172">
+      </label>
+      <label>Birth date:
+        <input type="date" name="dob" placeholder="e.g. 1987-03-09">
+      </label>
+      <label>
+        <input type="radio" name="gender" value="male" checked> Male
+      </label>
+      <label>
+        <input type="radio" name="gender" value="female"> Female
+      </label>
+    </section>
+  </body>
+</html>
