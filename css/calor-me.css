@@ -1,0 +1,119 @@
+/*
+ * Whole page settings
+ */
+body, html {
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 20px;
+}
+
+/*
+ * Toolbar
+ */
+body nav {
+  text-align: center;
+}
+
+/*
+ * Section navigation
+ */
+section[aria-role=tab] {
+  /* Hide all tabs by default */
+  display: none;
+  /* Don't let the panels stretch too wide */
+  max-width: 500px;
+}
+section[aria-role=tab][aria-selected=true] {
+  /* Only show the selected tab */
+  display: block;
+  /* Center the panel in the page */
+  margin-left: auto;
+  margin-right: auto;
+}
+section[aria-role=tab] > h2 {
+  /* Hide the tab titles */
+  display: none;
+}
+
+/*
+ * Summary tab
+ */
+.summary-form {
+  text-align: center;
+}
+.add-data-group {
+  width: 100%;
+  padding: 0.8em 0;
+}
+.add-data-group button {
+  display: inline-block;
+  width: 40%;
+  min-height: 2em;
+
+  color: white;
+  font-weight: bold;
+  font-size: 2em;
+  text-shadow: 1px 1px 0 black;
+  
+  border-radius: 25px;
+  box-shadow: 0 0 0 2px black, 0 0 0 3px white;
+  
+  margin: 0 0.2em;
+  padding-bottom: 0.3em;
+}
+.add-data-group button span.sign {
+  font-size: 2em;
+  display: block;
+  margin-bottom: -0.25em;
+}
+button.addFuel {
+  background: linear-gradient(30deg, #101e9b, #2ea9ef);
+}
+button.addExercise {
+  background: linear-gradient(30deg, #105432, #3eaf2c);
+}
+
+/*
+ * Dialogs for adding food, activities
+ */
+div.overlay-container {
+  display: none;
+  position: fixed;
+  left: 0; top: 0; width: 100%; height: 100%;
+  background-color:rgba(0,0,0,0.7);
+  z-index: 100;
+  margin: 0;
+  padding: 0;
+  overflow: hidden
+  text-align: center;
+}
+section[aria-role=dialog] {
+  margin-top: 20%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  max-width: 400px;
+  background: white;
+  border-radius: 30px;
+  box-shadow: 5px 5px 10px 0 black;
+  padding: 2%;
+}
+section[aria-role=dialog][aria-hidden=true] {
+  display: none;
+}
+section.add-data {
+  text-align: center;
+}
+section.add-data fieldset {
+  border: none;
+}
+
+/*
+ * Common form formatting
+ */
+input, button {
+  font-size: 1em;
+}
+input[type=number] {
+  width: 3em;
+}

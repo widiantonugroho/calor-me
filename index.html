@@ -1,107 +1,132 @@
 <!doctype html>
 <html>
   <head>
+    <meta charset="utf-8">
     <title>Calor-me! Calor-you! Calor-rifitastical!</title>
+    <link rel="stylesheet" href="css/calor-me.css" type="text/css">
   </head>
   <body>
     <nav>
-      <menu type="toolbar">
+      <menu type="toolbar" aria-role="tablist">
         <a href="#summary">Summary</a>
         <a href="#log">Log</a>
         <a href="#settings">Settings</a>
       </menu>
     </nav>
-    <section id="summary">
-      <h2>Summary</h2>
-      <form>
+    <div aria-role="tabpanel">
+      <section id="summary" aria-role="tab" aria-selected="true">
+        <h2>Summary</h2>
+        <form class="summary-form">
+          <output class="person-meter">
+            <!-- Put picture of person here -->
+          </output>
+          <div class="add-data-group" aria-role="group">
+            <button class="addFuel" id="addFuel"><span class="sign">+</span>
+                Fuel</button>
+            <button class="addExercise" id="addExercise"><span
+                class="sign">-</span> Exercise</button>
+          </div>
+          <label>
+            Weight
+            <input type="number" name="weight" value="70" placeholder="e.g. 65">
+            kg
+          </label>
+        </form>
+        <div class="overlay-container">
+          <section id="add-food" class="add-data" aria-role="dialog"
+            aria-label="Add food" aria-hidden="true">
+            <h2>Add food</h2>
+            <form>
+              <fieldset>
+                <input name="food" list="foods" placeholder="e.g. Apple">
+                <datalist id="foods">
+                  <option>Apple
+                  <option>Donut
+                </datalist>
+                <label> x 
+                  <input type="number" name="quantity" placeholder="e.g. 2"
+                   class="food-quantity">
+                </label>
+              </fieldset>
+              <fieldset>
+                <input type="submit" value="OK">
+                <button class="cancel">Cancel</button>
+              </fieldset>
+            </form>
+          </section>
+          <section id="add-exercise" class="add-data" aria-role="dialog"
+            aria-label="Add activity" aria-hidden="true">
+            <h2>Add activity</h2>
+            <form>
+              <fieldset>
+                <input name="activity" list="activities"
+                  placeholder="e.g.  Running">
+                <datalist id="activities">
+                  <option>Running
+                  <option>Swimming
+                </datalist>
+                <label> for 
+                  <input type="number" name="duration" placeholder="e.g. 30"
+                   class="activity-duration">
+                  min
+                </label>
+              </fieldset>
+              <fieldset>
+                <input type="submit" value="OK">
+                <button class="cancel">Cancel</button>
+              </fieldset>
+            </form>
+          </section>
+        </div>
+      </section>
+      <section id="log" aria-role="tab" aria-selected="false">
+        <h2>Log</h2>
         <output>
-          <!-- Put picture of person here -->
+          <!-- Weight graph goes here -->
         </output>
-        <button class="addFuel" id="addFuel">+ Fuel</button>
-        <button class="addExercise" id="addExercise">- Exercise</button>
-        <input type="number" name="weight" value="70">
-      </form>
-      <section id="add-food" class="add-data">
-        <h2>Add food</h2>
-        <form>
-          <input name="food" list="foods" placeholder="e.g. Apple">
-          <datalist id="foods">
-            <option>Apple
-            <option>Donut
-          </datalist>
-          <label> x 
-            <input type="number" name="quantity" placeholder="e.g. 2"
-             class="food-quantity">
-          </label>
-          <input type="submit" value="OK">
-          <button class="cancel">Cancel</button>
-        </form>
+        <details>
+          <summary class="under">
+            <time datetime="2012-10-12">12 Oct</time>,
+            <data class="calorie-balance under" value="-200">-200 kCal</data>
+          </summary>
+          <div class="log-entry plus">
+            <span class="food">Hamburger</span>
+            <data class="quantity" value="1">1</data>
+            <data class="calorie-count plus" value="500">500 kCal</data>
+          </div>
+          <div class="log-entry minus">
+            <span class="activity">Running</span>
+            <data class="calorie-count minus" value="-363">-363 kCal</data>
+          </div>
+        </details>
+        <details>
+          <summary class="under">
+            <time datetime="2012-10-11">11 Oct</time>,
+            <data class="calorie-balance over" value="153">+153 kCal</data>
+          </summary>
+        </details>
+        <details>
+          <summary class="equal">
+            <time datetime="2012-10-11">11 Oct</time>,
+            <data class="calorie-balance equal" value="8">+8 kCal</data>
+          </summary>
+        </details>
       </section>
-      <section id="add-exercise" class="add-data">
-        <h2>Add activity</h2>
-        <form>
-          <input name="activity" list="activities" placeholder="e.g. Running">
-          <datalist id="activities">
-            <option>Running
-            <option>Swimming
-          </datalist>
-          <label> for 
-            <input type="number" name="duration" placeholder="30"
-             class="activity-duration">
-            min
-          </label>
-          <input type="submit" value="OK">
-          <button class="cancel">Cancel</button>
-        </form>
+      <section id="settings" aria-role="tab" aria-selected="false">
+        <h2>Settings</h2>
+        <label>Height (in cm):
+          <input type="number" name="height" placeholder="e.g. 172">
+        </label>
+        <label>Birth date:
+          <input type="date" name="dob" placeholder="e.g. 1987-03-09">
+        </label>
+        <label>
+          <input type="radio" name="gender" value="male" checked> Male
+        </label>
+        <label>
+          <input type="radio" name="gender" value="female"> Female
+        </label>
       </section>
-    </section>
-    <section id="log">
-      <h2>Log</h2>
-      <output>
-        <!-- Weight graph goes here -->
-      </output>
-      <details>
-        <summary class="under">
-          <time datetime="2012-10-12">12 Oct</time>,
-          <data class="calorie-balance under" value="-200">-200 kCal</data>
-        </summary>
-        <div class="log-entry plus">
-          <span class="food">Hamburger</span>
-          <data class="quantity" value="1">1</data>
-          <data class="calorie-count plus" value="500">500 kCal</data>
-        </div>
-        <div class="log-entry minus">
-          <span class="activity">Running</span>
-          <data class="calorie-count minus" value="-363">-363 kCal</data>
-        </div>
-      </details>
-      <details>
-        <summary class="under">
-          <time datetime="2012-10-11">11 Oct</time>,
-          <data class="calorie-balance over" value="153">+153 kCal</data>
-        </summary>
-      </details>
-      <details>
-        <summary class="equal">
-          <time datetime="2012-10-11">11 Oct</time>,
-          <data class="calorie-balance equal" value="8">+8 kCal</data>
-        </summary>
-      </details>
-    </section>
-    <section id="settings">
-      <h2>Settings</h2>
-      <label>Height (in cm):
-        <input type="number" name="height" placeholder="e.g. 172">
-      </label>
-      <label>Birth date:
-        <input type="date" name="dob" placeholder="e.g. 1987-03-09">
-      </label>
-      <label>
-        <input type="radio" name="gender" value="male" checked> Male
-      </label>
-      <label>
-        <input type="radio" name="gender" value="female"> Female
-      </label>
-    </section>
+    </div>
   </body>
 </html>
