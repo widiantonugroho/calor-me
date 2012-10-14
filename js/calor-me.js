@@ -6,12 +6,12 @@ function init() {
   //
   // Instead we are using an approach called "unobtrusive javascript" to add the
   // event handlers later.
-  document.getElementById("addFood").addEventListener("click",
+  document.getElementById("showFoodForm").addEventListener("click",
     function(e) {
       launchDialogById('add-food');
       e.preventDefault();
     }, false);
-  document.getElementById("addActivity").addEventListener("click",
+  document.getElementById("showActivityForm").addEventListener("click",
     function(e) {
       launchDialogById('add-activity');
       e.preventDefault();
@@ -44,6 +44,20 @@ function init() {
         }
       }, false);
   }
+
+  // Handle submitting the different forms
+  document.querySelector('#add-food form').addEventListener("submit",
+      function(e) {
+        addFood();
+        e.preventDefault();
+      }, false
+    );
+  document.querySelector('#add-activity form').addEventListener("submit",
+      function(e) {
+        addActivity();
+        e.preventDefault();
+      }, false
+    );
 }
 window.addEventListener("DOMContentLoaded", init, false);
 
@@ -69,5 +83,18 @@ function showOrHideDialog(dialog, action) {
 }
 
 function resetDialog(dialog) {
-  // XXX
+  var forms = dialog.getElementsByTagName("form");
+  for (var i = 0; i < forms.length; i++ ) {
+    forms[i].reset();
+  }
+}
+
+function addFood() {
+  // TODO
+  hideDialog(document.getElementById('add-food'));
+}
+
+function addActivity() {
+  // TODO
+  hideDialog(document.getElementById('add-activity'));
 }
