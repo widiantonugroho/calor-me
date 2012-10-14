@@ -6,6 +6,29 @@ function init() {
   //
   // Instead we are using an approach called "unobtrusive javascript" to add the
   // event handlers later.
+
+  // Tab navigation
+  var tablinks = document.querySelectorAll("menu[aria-role=tablist] a");
+  for (var i = 0; i < tablinks.length; i++) {
+    tablinks[i].addEventListener("click",
+      function(e) {
+        var match = /#[^#]+$/.exec(e.target.href);
+        if (match) {
+          var selectedId = match[0].substr(1);
+          var tabs = document.querySelectorAll("section[aria-role=tab]");
+          for (var j = 0; j < tabs.length; j++) {
+            var tab = tabs[j];
+            tab.setAttribute("aria-selected",
+                             tab.id === selectedId ? "true" : "false");
+          }
+          e.preventDefault();
+        }
+      },
+      false
+    );
+  }
+
+  // Summary form
   document.getElementById("showFoodForm").addEventListener("click",
     function(e) {
       launchDialogById('add-food');
