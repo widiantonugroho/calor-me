@@ -115,6 +115,10 @@ section.add-data {
 section.add-data fieldset {
   border: none;
 }
+label.calc-result {
+  margin: 0.5em 0;
+  display: block;
+}
 
 /*
  * Common form formatting
