@@ -66,10 +66,10 @@ section[aria-role=tab] > h2 {
   display: block;
   margin-bottom: -0.25em;
 }
-button.addFuel {
+button.addFood {
   background: linear-gradient(30deg, #101e9b, #2ea9ef);
 }
-button.addExercise {
+button.addActivity {
   background: linear-gradient(30deg, #105432, #3eaf2c);
 }
 
@@ -88,7 +88,7 @@ div.overlay-container {
   text-align: center;
 }
 section[aria-role=dialog] {
-  margin-top: 20%;
+  margin-top: 10%;
   margin-left: auto;
   margin-right: auto;
   width: 80%;
