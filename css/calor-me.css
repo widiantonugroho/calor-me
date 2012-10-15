@@ -19,23 +19,28 @@ body nav {
 }
 
 /*
- * Section navigation
+ * Application pages (tabs)
  */
 section[aria-role=tab] {
   /* Hide all tabs by default */
   display: none;
   /* Don't let the panels stretch too wide */
   max-width: 500px;
-}
-section[aria-role=tab][aria-selected=true] {
-  /* Only show the selected tab */
-  display: block;
   /* Center the panel in the page */
   margin-left: auto;
   margin-right: auto;
 }
+section[aria-role=tab][aria-selected=true] {
+  /* Only show the selected tab */
+  display: block;
+}
 section[aria-role=tab] > h2 {
-  /* Hide the tab titles */
+  /* 
+   * Hide the tab titles.
+   *
+   * They are useful semantically but when presented visually, the navigation
+   * links at the top will serve the same purpose.
+   */
   display: none;
 }
 
@@ -43,12 +48,18 @@ section[aria-role=tab] > h2 {
  * Summary tab
  */
 .summary-form {
+  /* Center everything */
   text-align: center;
 }
+/* Group the two big buttons together */
 .add-data-group {
   width: 100%;
   padding: 0.8em 0;
 }
+/* 
+ * Make each of the "Add food" and "Add activites" buttons big with an outline,
+ * a shadow etc.
+ */
 .add-data-group button {
   display: inline-block;
   width: 40%;
@@ -65,11 +76,13 @@ section[aria-role=tab] > h2 {
   margin: 0 0.2em;
   padding-bottom: 0.3em;
 }
+/* Make the + or - bigger and on a line by itself */
 .add-data-group button span.sign {
   font-size: 2em;
   display: block;
   margin-bottom: -0.25em;
 }
+/* Add a blue gradient to the back of the add food button */
 button.addFood {
   background: -moz-gradient(30deg, #101e9b, #2ea9ef);
   background: -webkit-linear-gradient(30deg, #101e9b, #2ea9ef);
@@ -77,6 +90,7 @@ button.addFood {
   background: -ms-linear-gradient(30deg, #101e9b, #2ea9ef);
   background: linear-gradient(30deg, #101e9b, #2ea9ef);
 }
+/* Add a green gradient to the back of the add exercise button */
 button.addActivity {
   background: -moz-linear-gradient(30deg, #105432, #3eaf2c);
   background: -webkit-linear-gradient(30deg, #105432, #3eaf2c);
@@ -87,6 +101,10 @@ button.addActivity {
 
 /*
  * Dialogs for adding food, activities
+ */
+
+/* 
+ * When we pop up a dialog, cover the rest of the screen with a translucent grey
  */
 div.overlay-container {
   display: none;
@@ -99,6 +117,7 @@ div.overlay-container {
   overflow: hidden
   text-align: center;
 }
+/* Make the dialogs centered, white with rounded corners etc. */
 section[aria-role=dialog] {
   margin-top: 10%;
   margin-left: auto;
@@ -110,15 +129,19 @@ section[aria-role=dialog] {
   box-shadow: 5px 5px 10px 0 black;
   padding: 2%;
 }
+/* Make dialogs marked as aria-hidden not display */
 section[aria-role=dialog][aria-hidden=true] {
   display: none;
 }
+/* Align the form controls in the middle */
 section.add-data {
   text-align: center;
 }
+/* Get rid of the border put around fieldsets in most UAs */
 section.add-data fieldset {
   border: none;
 }
+/* Put the calculated calorie result on a new line */
 label.calc-result {
   margin: 0.5em 0;
   display: block;
@@ -127,9 +150,11 @@ label.calc-result {
 /*
  * Common form formatting
  */
+/* Make the font-size of fields consistent */
 input, button {
   font-size: 1em;
 }
+/* Number fields don't need to be too wide */
 input[type=number] {
   width: 3em;
 }
