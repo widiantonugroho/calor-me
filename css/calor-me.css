@@ -10,6 +10,9 @@ body, html {
   font-family: sans-serif;
   font-size: 20px;
 }
+iframe {
+  border: none;
+}
 
 /*
  * Toolbar
@@ -50,6 +53,15 @@ section[aria-role=tab] > h2 {
 .summary-form {
   /* Center everything */
   text-align: center;
+}
+/* 
+ * Size the person. This isn't quite right, but we'll fix it when we look at
+ * media queries. Vertical sizing isn't CSS's strong point.
+ */
+iframe.person-meter {
+  width: 80%;
+  height: 20em;
+  max-height: 80%;
 }
 /* Group the two big buttons together */
 .add-data-group {
