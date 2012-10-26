@@ -85,8 +85,26 @@ function init() {
         e.preventDefault();
       }, false
     );
+
+  // Log form
+  // Register one event listener on the log container and use it to detect
+  // clicks on the summary elements (which are dynamically added).
+  // This works so long as we turn off pointer-events on all child content
+  // which is certainly not very presentational.
+  document.getElementById("log").addEventListener("click",
+      function (evt) {
+        if (evt.target.tagName === "DETAILS") {
+          var details = evt.target;
+          if (details.hasAttribute("open")) {
+            details.removeAttribute("open");
+          } else {
+            details.setAttribute("open", "open");
+          }
+        }
+      }, false
+    );
 }
-window.addEventListener("DOMContentLoaded", init, false);
+window.addEventListener("load", init, false);
 
 function launchDialogById(id) {
   var dialog = document.getElementById(id);

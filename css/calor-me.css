@@ -158,3 +158,48 @@ input, button {
 input[type=number] {
   width: 3em;
 }
+
+/*
+ * Log tab
+ */
+details {
+  display: block;
+  border-top: 1px dotted grey;
+  padding: 0.5em 0.2em;
+}
+details:first-of-type,
+details[open] + details:not([open])
+{
+  border-top-width: 0;
+}
+details[open] {
+  background: #eee;
+  border: 1px solid grey;
+  border-radius: 10px;
+}
+details > :not(summary) {
+  display: none;
+  margin-left: 1.5em;
+}
+details[open] > :not(summary) {
+  display: block;
+}
+data.calorie-balance.under,
+data.calorie-count.minus {
+  color: green;
+}
+data.calorie-balance.equal {
+  color: orange;
+}
+data.calorie-balance.over,
+data.calorie-count.plus {
+  color: red;
+}
+summary {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.25em;
+}
+details * {
+  pointer-events: none;
+}
