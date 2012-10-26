@@ -3,6 +3,13 @@
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 function init() {
+  initSummary();
+  initLog();
+  initSettings();
+}
+window.addEventListener("load", init, false);
+
+function initSummary() {
   // Add event handlers to the buttons.
   //
   // Although it is possible to attach the event handlers in the HTML using
@@ -85,8 +92,9 @@ function init() {
         e.preventDefault();
       }, false
     );
+}
 
-  // Log form
+function initLog() {
   // Register one event listener on the log container and use it to detect
   // clicks on the summary elements (which are dynamically added).
   // This works so long as we turn off pointer-events on all child content
@@ -104,7 +112,9 @@ function init() {
       }, false
     );
 }
-window.addEventListener("load", init, false);
+
+function initSettings() {
+}
 
 function launchDialogById(id) {
   var dialog = document.getElementById(id);
