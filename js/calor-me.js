@@ -3,13 +3,6 @@
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 function init() {
-  initSummary();
-  initLog();
-  initSettings();
-}
-window.addEventListener("load", init, false);
-
-function initSummary() {
   // Add event handlers to the buttons.
   //
   // Although it is possible to attach the event handlers in the HTML using
@@ -17,7 +10,14 @@ function initSummary() {
   //
   // Instead we are using an approach called "unobtrusive javascript" to add the
   // event handlers later.
+  initTabs();
+  initSummary();
+  initLog();
+  initSettings();
+}
+window.addEventListener("load", init, false);
 
+function initTabs() {
   // Tab navigation
   var tablinks = document.querySelectorAll("menu[aria-role=tablist] a");
   for (var i = 0; i < tablinks.length; i++) {
@@ -38,8 +38,15 @@ function initSummary() {
       false
     );
   }
+}
 
-  // Summary form
+/* --------------------------------------
+ *
+ * SUMMARY
+ *
+ * --------------------------------------*/
+
+function initSummary() {
   document.getElementById("showFoodForm").addEventListener("click",
     function(e) {
       launchDialogById('add-food');
@@ -94,28 +101,6 @@ function initSummary() {
     );
 }
 
-function initLog() {
-  // Register one event listener on the log container and use it to detect
-  // clicks on the summary elements (which are dynamically added).
-  // This works so long as we turn off pointer-events on all child content
-  // which is certainly not very presentational.
-  document.getElementById("log").addEventListener("click",
-      function (evt) {
-        if (evt.target.tagName === "DETAILS") {
-          var details = evt.target;
-          if (details.hasAttribute("open")) {
-            details.removeAttribute("open");
-          } else {
-            details.setAttribute("open", "open");
-          }
-        }
-      }, false
-    );
-}
-
-function initSettings() {
-}
-
 function launchDialogById(id) {
   var dialog = document.getElementById(id);
   console.assert(dialog, "Dialog not found");
@@ -152,4 +137,53 @@ function addFood() {
 function addActivity() {
   // TODO
   hideDialog(document.getElementById('add-activity'));
+}
+
+/* --------------------------------------
+ *
+ * LOG
+ *
+ * --------------------------------------*/
+
+function initLog() {
+  // Register one event listener on the log container and use it to detect
+  // clicks on the summary elements (which are dynamically added).
+  // This works so long as we turn off pointer-events on all child content
+  // which is certainly not very presentational.
+  document.getElementById("log").addEventListener("click",
+      function (evt) {
+        if (evt.target.tagName === "DETAILS") {
+          var details = evt.target;
+          if (details.hasAttribute("open")) {
+            details.removeAttribute("open");
+          } else {
+            details.setAttribute("open", "open");
+          }
+        }
+      }, false
+    );
+}
+
+/* --------------------------------------
+ *
+ * SETTINGS
+ *
+ * --------------------------------------*/
+
+function initSettings() {
+  // Listen to changes to gender
+  var genderRadios =
+    document.querySelectorAll("input[type=radio][name=gender]");
+  for (var i = 0; i < genderRadios.length; i++) {
+    var radio = genderRadios[i];
+    radio.addEventListener("change", onChangeGender, false);
+  }
+
+  // TODO Need to store the gender, set the radio buttons and update the
+  // diagram accordingly
+}
+
+function onChangeGender(evt) {
+  var figure = document.getElementById("figure");
+  figure.contentDocument.setGender(evt.target.value);
 }

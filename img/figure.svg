@@ -25,14 +25,14 @@
   <!-- Dynamic changes -->
   <script type="text/javascript">
   <![CDATA[
-    function setLevel(current, full, className) {
+    document.setLevel = function(current, full, className) {
       var fillRect = document.getElementById("fillRect");
       var percent = current / full * 100;
       var clampedPercent = Math.max(Math.min(percent, 100), 0);
       fillRect.setAttribute("y", 100-clampedPercent.toFixed(0) + "%");
       fillRect.setAttribute("height", clampedPercent.toFixed(0) + "%");
     }
-    function setGender(gender) {
+    document.setGender = function(gender) {
       gender = gender.toLowerCase();
       var id = gender === "woman" || gender == "female" || gender === "f"
              ? "womanOutline" : "manOutline";
