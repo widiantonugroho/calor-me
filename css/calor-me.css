@@ -203,3 +203,21 @@ summary {
 details * {
   pointer-events: none;
 }
+
+/*
+ * Settings tab
+ */
+#settings label {
+  display: block;
+  margin: 1.2em 1em;
+}
+#settings label.radio {
+  display: block;
+  margin: 0.5em 1em;
+}
+#settings input[name=height] {
+  width: 4em;
+}
+#settings input[name=dob] {
+  width: 7em;
+}
