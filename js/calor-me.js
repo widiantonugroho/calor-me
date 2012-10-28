@@ -55,6 +55,8 @@ function initTabs() {
  * --------------------------------------*/
 
 function initSummary() {
+  updateFigure();
+
   document.getElementById("showFoodForm").addEventListener("click",
     function(e) {
       launchDialogById('add-food');
@@ -139,16 +141,24 @@ function resetDialog(dialog) {
 
 function addFood() {
   // TODO
-  counter.addFood(800, "kcal");
+  counter.addFood(200, "kcal");
   hideDialog(document.getElementById('add-food'));
+  updateFigure();
   document.getElementById('riseSound').play();
 }
 
 function addActivity() {
   // TODO
-  counter.addActivity(800, "kcal");
+  counter.addActivity(200, "kcal");
   hideDialog(document.getElementById('add-activity'));
+  updateFigure();
   document.getElementById('fallSound').play();
+}
+
+function updateFigure() {
+  var figure = document.getElementById("figure");
+  var level = counter.kjIn / counter.kjOut;
+  figure.contentDocument.setLevel(level, "good");
 }
 
 /* --------------------------------------
@@ -235,13 +245,13 @@ CalorieCounter = function() {
 CalorieCounter.prototype.KJ_PER_KCAL = 4.2;
 
 CalorieCounter.prototype.addActivity = function(amount, unit) {
-  if (unit.toLowerCase === "kcal")
+  if (typeof unit !== "undefined" && unit.toLowerCase === "kcal")
     amount *= this.KJ_PER_KCAL;
   this.spent += amount;
 }
 
 CalorieCounter.prototype.addFood = function(amount, unit) {
-  if (unit.toLowerCase === "kcal")
+  if (typeof unit !== "undefined" && unit.toLowerCase === "kcal")
     amount *= this.KJ_PER_KCAL;
   this.consumed += amount;
 }
