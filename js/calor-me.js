@@ -33,6 +33,10 @@ function initTabs() {
                              tab.id === selectedId ? "true" : "false");
           }
           e.preventDefault();
+          // Play tab switch sound if available
+          var sfx = document.getElementById('tabSwitchSound');
+          if (sfx)
+            sfx.play();
         }
       },
       false
@@ -132,11 +136,13 @@ function resetDialog(dialog) {
 function addFood() {
   // TODO
   hideDialog(document.getElementById('add-food'));
+  document.getElementById('riseSound').play();
 }
 
 function addActivity() {
   // TODO
   hideDialog(document.getElementById('add-activity'));
+  document.getElementById('fallSound').play();
 }
 
 /* --------------------------------------
