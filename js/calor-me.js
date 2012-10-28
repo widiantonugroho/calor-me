@@ -2,7 +2,11 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 
+var counter;
+
 function init() {
+  counter = new CalorieCounter();
+
   // Add event handlers to the buttons.
   //
   // Although it is possible to attach the event handlers in the HTML using
@@ -135,12 +139,14 @@ function resetDialog(dialog) {
 
 function addFood() {
   // TODO
+  counter.addFood(800, "kcal");
   hideDialog(document.getElementById('add-food'));
   document.getElementById('riseSound').play();
 }
 
 function addActivity() {
   // TODO
+  counter.addActivity(800, "kcal");
   hideDialog(document.getElementById('add-activity'));
   document.getElementById('fallSound').play();
 }
@@ -192,4 +198,50 @@ function initSettings() {
 function onChangeGender(evt) {
   var figure = document.getElementById("figure");
   figure.contentDocument.setGender(evt.target.value);
+}
+
+/* --------------------------------------
+ *
+ * CALORIE COUNTER MODEL
+ *
+ * --------------------------------------*/
+
+// TODO
+// This is all placeholder code for the moment.
+// The calculation of the BMR needs to be based on the settings etc.
+//
+// One note is that internally everything is represented in metric (kJ) but we
+// offer interfaces for reporting values in calories (actually kilocalories).
+
+CalorieCounter = function() {
+  this.consumed  = 0;
+  this.spent     = 0;
+  this.bmr       = 8000;
+
+  this.__defineGetter__("kjOut", function() {
+    return this.bmr + this.spent;
+  });
+  this.__defineGetter__("kcalOut", function() {
+    return this.kjOut / this.KJ_PER_KCAL;
+  });
+  this.__defineGetter__("kjIn", function() {
+    return this.consumed;
+  });
+  this.__defineGetter__("kcalIn", function() {
+    return this.kjIn / this.KJ_PER_KCAL;
+  });
+}
+
+CalorieCounter.prototype.KJ_PER_KCAL = 4.2;
+
+CalorieCounter.prototype.addActivity = function(amount, unit) {
+  if (unit.toLowerCase === "kcal")
+    amount *= this.KJ_PER_KCAL;
+  this.spent += amount;
+}
+
+CalorieCounter.prototype.addFood = function(amount, unit) {
+  if (unit.toLowerCase === "kcal")
+    amount *= this.KJ_PER_KCAL;
+  this.consumed += amount;
 }
