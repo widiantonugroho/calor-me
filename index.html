@@ -56,7 +56,8 @@
           <section id="add-food" class="add-data" aria-role="dialog"
             aria-label="Add food" aria-hidden="true">
             <h2>Add food</h2>
-            <form>
+            <!-- The action is to workaround a Safari bug -->
+            <form action="javascript:evt.preventDefault()">
               <fieldset>
                 <input name="food" list="foods" placeholder="e.g. Apple">
                 <datalist id="foods">
@@ -80,7 +81,7 @@
           <section id="add-activity" class="add-data" aria-role="dialog"
             aria-label="Add activity" aria-hidden="true">
             <h2>Add activity</h2>
-            <form>
+            <form action="javascript:evt.preventDefault()">
               <fieldset>
                 <input name="activity" list="activities"
                   placeholder="e.g.  Running">
