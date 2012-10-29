@@ -67,7 +67,7 @@ function initTabs() {
  * --------------------------------------*/
 
 function initSummary() {
-  updateFigure();
+  updateSummary();
 
   document.getElementById("showFoodForm").addEventListener("click",
     function(e) {
@@ -155,7 +155,7 @@ function addFood() {
   // TODO
   counter.addFood(2000, "kcal");
   hideDialog(document.getElementById('add-food'));
-  updateFigure();
+  updateSummary();
   document.getElementById('riseSound').play();
 }
 
@@ -163,14 +163,23 @@ function addActivity() {
   // TODO
   counter.addActivity(2000, "kcal");
   hideDialog(document.getElementById('add-activity'));
-  updateFigure();
+  updateSummary();
   document.getElementById('fallSound').play();
 }
 
-function updateFigure() {
+function updateSummary() {
+  // Update figure
   var figure = document.getElementById("figure");
   var level = counter.kjIn / counter.kjOut;
   figure.contentDocument.setLevel(level, getClassLevel(level));
+  // Update text summary
+  var text = document.getElementById("text-summary");
+  text.querySelector('.net-summary').textContent =
+    (counter.kcalIn - counter.kcalOut).toFixed(0) + "cal";
+  text.querySelector('.consumed-summary').textContent =
+    counter.kcalIn.toFixed(0) + "cal consumed";
+  text.querySelector('.spent-summary').textContent =
+    counter.kcalOut.toFixed(0) + "cal spent";
 }
 
 function getClassLevel(level) {
