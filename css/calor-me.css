@@ -110,6 +110,40 @@ button.addActivity {
   background: -ms-linear-gradient(30deg, #105432, #3eaf2c);
   background: linear-gradient(30deg, #105432, #3eaf2c);
 }
+/* Position text labels over graphic.
+ * First make a point of reference by marking the container as relative. */
+div.graphic-container {
+  position: relative;
+}
+.text-summary {
+  /* Position text on top of character and centered */
+  position: absolute;
+  top: 20%;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+  /* Text styling */
+  color: white;
+  font-weight: bold;
+  text-shadow: 0.1em 0.1em 0.2em black;
+
+  /* Don't allow pointer events in case this ends up overlapping the buttons
+   * below. */
+  pointer-events: none;
+}
+/* Text styling for the remaining text */
+.net-summary {
+  font-size: 3.5em;
+  display: block;
+}
+.details {
+  font-size: 0.8em;
+  text-shadow: 0.05em 0.05em 0.1em black;
+}
+.consumed-summary, .spent-summary {
+  display: block;
+}
 
 /*
  * Dialogs for adding food, activities

@@ -21,8 +21,17 @@
       <section id="summary" aria-role="tab" aria-selected="true">
         <h2>Summary</h2>
         <form class="summary-form">
-          <iframe class="person-meter" src="img/figure.svg"
-            id="figure"></iframe>
+          <div class="graphic-container">
+            <iframe class="person-meter" src="img/figure.svg"
+              id="figure"></iframe>
+            <div class="text-summary">
+              <span class="net-summary">-600cal</span>
+              <span class="details">
+                <span class="consumed-summary">1400cal consumed</span>
+                <span class="spent-summary">8000cal spent</span>
+              </span>
+            </div>
+          </div>
           <div class="add-data-group" aria-role="group">
             <button class="addFood" id="showFoodForm"><span
                 class="sign">+</span> Food</button>
