@@ -20,24 +20,57 @@ iframe {
 body nav {
   text-align: center;
 }
+menu {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 1em;
+}
+menu a {
+  /* Make tabs equal size */
+  display: inline-block;
+  min-width: 5em;
+
+  /* Spacing */
+  padding: 0.5em;
+  
+  /* Background styling */
+  background: #eee;
+  border-bottom: 2.5px solid #bbb;
+  
+  /* Remove link styling */
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+/* Add border to left side except for the first a */
+menu a + a {
+  border-left: 1px solid #888;
+}
+/* Make border to selected tab a different color */
+menu a[aria-selected=true] {
+  border-bottom: 2.5px solid orange;
+}
+/* Add hover feedback to tabs */
+menu a:hover {
+  background: #fdebb8;
+}
 
 /*
- * Application pages (tabs)
+ * Application pages (tab panels)
  */
-section[aria-role=tab] {
-  /* Hide all tabs by default */
-  display: none;
+section[aria-role=tabpanel] {
+  display: block;
   /* Don't let the panels stretch too wide */
   max-width: 500px;
   /* Center the panel in the page */
   margin-left: auto;
   margin-right: auto;
 }
-section[aria-role=tab][aria-selected=true] {
-  /* Only show the selected tab */
-  display: block;
+section[aria-role=tabpanel][aria-hidden=true] {
+  /* Only show the selected tab panel */
+  display: none;
 }
-section[aria-role=tab] > h2 {
+section[aria-role=tabpanel] > h2 {
   /* 
    * Hide the tab titles.
    *
@@ -48,7 +81,7 @@ section[aria-role=tab] > h2 {
 }
 
 /*
- * Summary tab
+ * Summary tab panel
  */
 .summary-form {
   /* Center everything */
@@ -206,7 +239,7 @@ input[type=number] {
 }
 
 /*
- * Log tab
+ * Log tab panel
  */
 details {
   display: block;
@@ -251,7 +284,7 @@ details * {
 }
 
 /*
- * Settings tab
+ * Settings tab panel
  */
 #settings label {
   display: block;

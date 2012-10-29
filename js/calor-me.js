@@ -35,25 +35,34 @@ window.addEventListener("load", init, false);
 
 function initTabs() {
   // Tab navigation
-  var tablinks = document.querySelectorAll("menu[aria-role=tablist] a");
+  var tablinks = document.querySelectorAll("a[aria-role=tab]");
   for (var i = 0; i < tablinks.length; i++) {
     tablinks[i].addEventListener("click",
       function(e) {
-        var match = /#[^#]+$/.exec(e.target.href);
-        if (match) {
-          var selectedId = match[0].substr(1);
-          var tabs = document.querySelectorAll("section[aria-role=tab]");
-          for (var j = 0; j < tabs.length; j++) {
-            var tab = tabs[j];
-            tab.setAttribute("aria-selected",
-                             tab.id === selectedId ? "true" : "false");
-          }
-          e.preventDefault();
-          // Play tab switch sound if available
-          var sfx = document.getElementById('tabSwitchSound');
-          if (sfx)
-            sfx.play();
+        // Update tabs
+        var tabs = document.querySelectorAll("a[aria-role=tab]");
+        for (var j = 0; j < tabs.length; j++) {
+          var tab = tabs[j];
+          tab.setAttribute("aria-selected",
+                           tab === e.target ? "true" : "false");
         }
+
+        // Update panels
+        var selectedId = e.target.getAttribute("aria-controls");
+        var panels = document.querySelectorAll("section[aria-role=tabpanel]");
+        for (var j = 0; j < panels.length; j++) {
+          var panel = panels[j];
+          panel.setAttribute("aria-hidden",
+                             panel.id === selectedId ? "false" : "true");
+        }
+
+        // Don't follow the link
+        e.preventDefault();
+
+        // Play tab switch sound if available
+        var sfx = document.getElementById('tabSwitchSound');
+        if (sfx)
+          sfx.play();
       },
       false
     );
