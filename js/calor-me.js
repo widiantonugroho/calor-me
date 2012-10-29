@@ -2,7 +2,19 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 
+// The (global) calorie counter object
 var counter;
+
+// We define three levels
+//
+//  good - Consumed calories less than spent calories
+//  ok   - Consumed calories roughly equal to spent calories
+//  bad  - Consumed calories greater than spent calories
+//
+// The cutoffs for these levels are defined below in terms of the ratio of
+// consumed calories to spent calories:
+var OK_CUTOFF  = 0.95;
+var BAD_CUTOFF = 1.2;
 
 function init() {
   counter = new CalorieCounter();
@@ -141,7 +153,7 @@ function resetDialog(dialog) {
 
 function addFood() {
   // TODO
-  counter.addFood(200, "kcal");
+  counter.addFood(2000, "kcal");
   hideDialog(document.getElementById('add-food'));
   updateFigure();
   document.getElementById('riseSound').play();
@@ -149,7 +161,7 @@ function addFood() {
 
 function addActivity() {
   // TODO
-  counter.addActivity(200, "kcal");
+  counter.addActivity(2000, "kcal");
   hideDialog(document.getElementById('add-activity'));
   updateFigure();
   document.getElementById('fallSound').play();
@@ -158,7 +170,14 @@ function addActivity() {
 function updateFigure() {
   var figure = document.getElementById("figure");
   var level = counter.kjIn / counter.kjOut;
-  figure.contentDocument.setLevel(level, "good");
+  figure.contentDocument.setLevel(level, getClassLevel(level));
+}
+
+function getClassLevel(level) {
+  return level < OK_CUTOFF
+    ? "good"
+    : level < BAD_CUTOFF
+    ? "ok" : "bad";
 }
 
 /* --------------------------------------
