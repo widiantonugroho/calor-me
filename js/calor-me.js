@@ -61,7 +61,7 @@ function initTabs() {
 
         // Play tab switch sound if available
         var sfx = document.getElementById('tabSwitchSound');
-        if (sfx)
+        if (sfx && sfx.currentSrc)
           sfx.play();
       },
       false
@@ -165,7 +165,9 @@ function addFood() {
   counter.addFood(2000, "kcal");
   hideDialog(document.getElementById('add-food'));
   updateSummary();
-  document.getElementById('riseSound').play();
+  var rise = document.getElementById('riseSound');
+  if (rise.currentSrc)
+    rise.play();
 }
 
 function addActivity() {
@@ -173,7 +175,9 @@ function addActivity() {
   counter.addActivity(2000, "kcal");
   hideDialog(document.getElementById('add-activity'));
   updateSummary();
-  document.getElementById('fallSound').play();
+  var fall = document.getElementById('fallSound');
+  if (fall.currentSrc)
+    fall.play();
 }
 
 function updateSummary() {
