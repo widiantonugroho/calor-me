@@ -10,6 +10,8 @@
    }
    .fill {
     stroke-width: 3px;
+    transition-property: all;
+    transition-duration: 1.2s;
    }
    .fill.good {
     fill: green;
@@ -37,10 +39,9 @@
   <![CDATA[
     document.setLevel = function(ratio, className) {
       // Move the clipping rectangle so the level changes
-      var fillRect = document.getElementById("fillRect");
       var percent = ratio * 100;
       var clampedPercent = Math.max(Math.min(percent, 100), 0);
-      fillRect.setAttribute("y", 100-clampedPercent.toFixed(0) + "%");
+      animateLevel(clampedPercent, 1.2);
 
       // Add specified class (if any)
       if (typeof className !== "undefined") {
@@ -59,6 +60,45 @@
         outlines[i].setAttributeNS("http://www.w3.org/1999/xlink",
                                    "xlink:href", "#" + id);
       }
+    }
+    function animateLevel(percent, dur) {
+      // First check if any animation is necessary
+      var fillRect = document.getElementById("fillRect");
+      if (fillRect.y.baseVal.valueInSpecifiedUnits <= 0 && percent >= 100) {
+        return;
+      }
+
+      // Calculate y-value
+      var yValue = 100-percent.toFixed(0) + "%";
+
+      // TODO Detect if animation is supported and if so just set the attribute.
+
+      var anim = document.createElementNS("http://www.w3.org/2000/svg",
+                                          "animate");
+      anim.setAttribute("attributeName", "y");
+      anim.setAttribute("dur", dur.toFixed(1) + "s");
+      anim.setAttribute("calcMode", "spline");
+      anim.setAttribute("keySplines", "0 .75 .25 1");
+      anim.setAttribute("begin", "indefinite");
+      anim.setAttribute("to", yValue);
+      anim.setAttribute("fill", "freeze");
+
+      // When the animation finishes, it should be removed and the base value
+      // set
+      // Unfortunately WebKit doesn't support end events for SVG animation so we
+      // set a timeout for that case
+      var finalizeAnim = function() {
+        if (!anim.parentNode) {
+          return;
+        }
+        anim.targetElement.setAttribute("y", yValue);
+        anim.parentNode.removeChild(anim);
+      };
+      anim.addEventListener("end", finalizeAnim, false);
+      window.setTimeout(finalizeAnim, dur * 1000 + 100);
+
+      fillRect.appendChild(anim);
+      anim.beginElement();
     }
   ]]>
   </script>
