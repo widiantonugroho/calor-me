@@ -134,6 +134,8 @@ button.addFood {
   background: -o-linear-gradient(30deg, #101e9b, #2ea9ef);
   background: -ms-linear-gradient(30deg, #101e9b, #2ea9ef);
   background: linear-gradient(30deg, #101e9b, #2ea9ef);
+  background-image: url(../img/button-1.svg);
+  background-repeat: no-repeat;
 }
 /* Add a green gradient to the back of the add exercise button */
 button.addActivity {
@@ -142,6 +144,8 @@ button.addActivity {
   background: -o-linear-gradient(30deg, #105432, #3eaf2c);
   background: -ms-linear-gradient(30deg, #105432, #3eaf2c);
   background: linear-gradient(30deg, #105432, #3eaf2c);
+  background-image: url(../img/button-2.svg);
+  background-repeat: no-repeat;
 }
 /* Position text labels over graphic.
  * First make a point of reference by marking the container as relative. */
